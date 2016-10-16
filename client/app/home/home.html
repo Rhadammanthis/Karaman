@@ -1,0 +1,42 @@
+<md-content laout="column" flex >
+<div layout="row" layout-align="start start">
+</div>
+<div>
+    <md-table-container>
+        <table md-table ng-model="hmc._selected" md-row-select="hmc._selection" multiple="hmc._multiSelection" md-progress="hmc._promise">
+            <thead md-head md-order="hmc._order">
+                <tr md-row>
+                    <th md-column ><span>Nombre</span></th>
+                    <th md-column ><span>Apellido Paterno</span></th>
+                    <th md-column ><span>Apellido Materno</span></th>
+                </tr>
+            </thead>
+            <tbody md-body>
+                 <tr md-row md-select="patient" y md-auto-select="hmc._autoSelection" ng-click="hmc.showMessages(patient)" md-row-select="hmc._rowSelection" md-on-select="hmc._onSelect" ng-repeat="patient in hmc._lista | orderBy: hmc._order | filter:buscar ">
+                    <td md-cell>
+                        {{patient.name}}
+                    </td>
+                    <td md-cell>
+                        {{patient.parentalLastName}}
+                    </td>
+                    <td md-cell>
+                        {{patient.maternalLastName}}
+                    </td>
+                        <!--<td md-cell>
+                            {{patient.fregistro | date:'yyyy-MM-dd HH:mm:ss' }} <!--'yyyy-MM-dd HH:mm:ss'-->
+                        <!--</td>-->
+                 </tr>
+            </tbody>
+        </table>
+    </md-table-container>
+    <md-table-pagination md-boundary-links="hmc._boundary" 
+                         md-limit-options="hmc._limitOption" 
+                         md-label="{{hmc._label}}" 
+                         md-limit="hmc._limit" 
+                         md-total="{{hmc._total}}" 
+                         md-page="hmc._page" 
+                         md-page-select="hmc._selectedPage" 
+                         ng-disabled="hmc._disable" 
+                         md-on-paginate="hmc._onPage"></md-table-pagination>
+</div>
+</md-content>
