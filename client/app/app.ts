@@ -24,7 +24,7 @@ import footer from '../components/footer/footer.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
-import main from './main';
+import patients from './patient';
 import home from './home/home.component';
 
 import './app.css';
@@ -45,7 +45,7 @@ angular.module('colmorovApp', [
 
   _Auth,
   navbar,
-//   main,
+  patients,
   home,
   footer,
   constants,

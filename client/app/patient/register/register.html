@@ -1,0 +1,102 @@
+<div layout="column" ng-cloak class="md-inline-form">
+
+  <md-content layout-padding>
+    <div>
+      <form ng-submit='rpc.registerNewPatient()' name="userForm">
+
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Nomber(s)</label>
+            <input required ng-model="rpc.patient.name">
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Apellido Paterno</label>
+            <input required ng-model="rpc.patient.parentalLastName">
+          </md-input-container>
+
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Apellido Materno</label>
+            <input ng-model="rpc.patient.maternalLastName">
+          </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+          <md-input-container flex="50">
+            <label>Enter date</label>
+            <md-datepicker required ng-model="rpc.patient.dateOfBirth"></md-datepicker>
+          </md-input-container>
+
+         <md-radio-group required ng-model="rpc.patient.sex" flex="50">
+            <md-radio-button class="md-primary" value="hombre"> Hombre </md-radio-button>
+            <md-radio-button class="md-primary" value="mujer">Mujer</md-radio-button>
+          </md-radio-group>
+        </div>
+
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Nomber del Padre</label>
+            <input required ng-model="rpc.patient.fatherName">
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Nombre de la Madre</label>
+            <input required ng-model="rpc.patient.motherName">
+          </md-input-container>
+        </div>
+
+        <md-input-container class="md-block">
+          <label>Calle</label>
+          <input required ng-model="rpc.patient.street">
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+            <label>Colonia</label>
+          <input required ng-model="rpc.patient.neighborhood">
+        </md-input-container>
+
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Municipio</label>
+            <input required ng-model="rpc.patient.municipality">
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Estado</label>
+            <md-select ng-model="rpc.patient.state">
+              <md-option required ng-repeat="state in rpc.states" value="{{state.abbrev}}">
+                {{state.abbrev}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Código Postal</label>
+            <input name="postalCode" ng-model="rpc.patient.postalCode"
+                   ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
+
+            <div ng-messages="userForm.postalCode.$error" role="alert" multiple>
+              <div ng-message="required" class="my-message">You must supply a postal code.</div>
+              <div ng-message="pattern" class="my-message">That doesn't look like a valid postal
+                code.
+              </div>
+              <div ng-message="md-maxlength" class="my-message">
+                Don't use the long version silly...we don't need to be that specific...
+              </div>
+            </div>
+          </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+        <div flex="35">
+        </div>
+        <md-button type='submit' flex-gt-sm="30" flex class="md-raised md-primary">Primary</md-button>
+        <div flex="35">
+        </div>
+        </div>
+
+      </form>
+    </div>
+  </md-content>
+
+</div>

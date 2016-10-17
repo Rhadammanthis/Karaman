@@ -30,9 +30,11 @@ export class HomeComponent extends TablaBase{
     this.$location = $location;
     this.$mdDialog = $mdDialog;
     this.$mdMedia = $mdMedia;
-	this.Auth = Auth;
+	  this.Auth = Auth;
     this.angularGridInstance = angularGridInstance;
-	this.$rootScope = $rootScope;
+	  this.$rootScope = $rootScope;
+
+    this.setTitle('Karaman');
   }
 
 

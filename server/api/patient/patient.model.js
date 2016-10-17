@@ -3,21 +3,21 @@
 import mongoose from 'mongoose';
 
 var PatientSchema = new mongoose.Schema({
-  name: String,
-  parentalLastName: String,
-  maternalLastName: String,
-  sex: String,
-  dateOfBirth: Date,
-  fatherName: String,
+  name: String, //important
+  parentalLastName: String, //important
+  maternalLastName: String, //important
+  sex: String, //important
+  dateOfBirth: Date, //important
+  fatherName: String, //important
   fatherAge: Number,
   fatherBloodType: String,
-  motherName: String,
+  motherName: String, //important
   motherAge: String,
   motherBloodType: String,
-  address: String,
-  neighborhood: String,
+  street: String, //important
+  neighborhood: String, 
   municipality: String,
-  state: String,
+  state: String, //important
   postalCode: String
 });
 

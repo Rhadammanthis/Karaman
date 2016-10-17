@@ -98,7 +98,7 @@ export class NavbarComponent extends Base{
   }
 
   newPatient(){
-    this.$location.path('/');
+    this.$location.path('/patient/register');
   }
 
   goHome(){
