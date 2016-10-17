@@ -1,4 +1,6 @@
-# Colmorov
+# Karaman
+
+Managing a patient's file just got a heck of a lot easier!
 
 This project was generated with the [Angular Full-Stack Generator](https://github.com/DaftMonk/generator-angular-fullstack) version 4.0.4.
 
@@ -25,4 +27,4 @@ Run `gulp build` for building and `gulp serve` for preview.
 
 ## Testing
 
-Running `npm test` will run the unit tests with karma.
+Running `gulp test` will run the unit tests with mocha.
