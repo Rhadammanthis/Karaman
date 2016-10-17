@@ -49,6 +49,7 @@ export class HomeComponent extends TablaBase{
     }
 
     public initCallback(){
+      var _this = this;
       this.setReadyF(function(result){
         console.log('Siguiente ready',result);
       });
@@ -56,7 +57,8 @@ export class HomeComponent extends TablaBase{
         console.log('Siguiente error',error);
       });
       this.setSelectF(function(item){
-        console.log('Siguiente item',item);
+        console.log('Selected',item);
+        _this.$location.path('/records');
       })
     }
 }

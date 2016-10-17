@@ -26,6 +26,8 @@ import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
 import patients from './patient';
 import home from './home/home.component';
+import records from './records/records.component';
+
 
 import './app.css';
 
@@ -47,6 +49,7 @@ angular.module('colmorovApp', [
   navbar,
   patients,
   home,
+  records,
   footer,
   constants,
   socket,
@@ -146,8 +149,8 @@ angular.module('colmorovApp', [
   })
   .config(function($mdThemingProvider) {
       $mdThemingProvider.theme('default')
-      .primaryPalette('blue')
-      .accentPalette('teal');
+      .primaryPalette('pink')
+      .accentPalette('orange');
 });
 
 angular
