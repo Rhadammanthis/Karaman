@@ -4,24 +4,207 @@
       <md-tab label="Ficha de Identificación">
         <md-content class="md-padding">
           <h1 class="md-display-2">Ficha de Identificación</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
-          <p>met, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi. Aliquam erat volutpat. Nam placerat, tortor in ultrices porttitor, orci enim rutrum enim, vel tempor sapien arcu a tellus. Vivamus convallis sodales ante varius gravida. Curabitur a purus vel augue ultrices ultricies id a nisl. Nullam malesuada consequat diam, a facilisis tortor volutpat et. Sed urna dolor, aliquet vitae posuere vulputate, euismod ac lorem. Sed felis risus, pulvinar at interdum quis, vehicula sed odio. Phasellus in enim venenatis, iaculis tortor eu, bibendum ante. Donec ac tellus dictum neque volutpat blandit. Praesent efficitur faucibus risus, ac auctor purus porttitor vitae. Phasellus ornare dui nec orci posuere, nec luctus mauris semper.</p>
-          <p>Morbi viverra, ante vel aliquet tincidunt, leo dolor pharetra quam, at semper massa orci nec magna. Donec posuere nec sapien sed laoreet. Etiam cursus nunc in condimentum facilisis. Etiam in tempor tortor. Vivamus faucibus egestas enim, at convallis diam pulvinar vel. Cras ac orci eget nisi maximus cursus. Nunc urna libero, viverra sit amet nisl at, hendrerit tempor turpis. Maecenas facilisis convallis mi vel tempor. Nullam vitae nunc leo. Cras sed nisl consectetur, rhoncus sapien sit amet, tempus sapien.</p>
-          <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+          <form ng-submit='rdc.registerNewPatient()' name="userForm">
+
+            <div layout-gt-sm="row">
+              <md-input-container class="md-block" flex-gt-sm>
+                <label>Nomber(s)</label>
+                <input required ng-model="rdc.patient.name">
+              </md-input-container>
+
+              <md-input-container class="md-block" flex-gt-sm>
+                <label>Apellido Paterno</label>
+                <input required ng-model="rdc.patient.parentalLastName">
+              </md-input-container>
+
+              <md-input-container class="md-block" flex-gt-sm>
+                <label>Apellido Materno</label>
+                <input ng-model="rdc.patient.maternalLastName">
+              </md-input-container>
+            </div>
+
+            <div layout-gt-sm="row">
+              <md-input-container flex="60">
+                <label>Fecha de nacimiento</label>
+                <md-datepicker required ng-model="rdc.patient.dateOfBirth"></md-datepicker>
+              </md-input-container>
+
+              <md-radio-group required ng-model="rdc.patient.sex" flex="50">
+                <md-radio-button class="md-primary" value="hombre"> Hombre </md-radio-button>
+                <md-radio-button class="md-primary" value="mujer">Mujer</md-radio-button>
+              </md-radio-group>
+            </div>
+
+            <div layout-gt-sm="row">
+              <md-input-container class="md-block" flex-gt-sm>
+                <label>Nomber del Padre</label>
+                <input required ng-model="rdc.patient.fatherName">
+              </md-input-container>
+
+              <md-input-container class="md-block" flex-gt-sm>
+                <label>Nombre de la Madre</label>
+                <input required ng-model="rdc.patient.motherName">
+              </md-input-container>
+            </div>
+
+            <md-input-container class="md-block">
+              <label>Calle</label>
+              <input required ng-model="rdc.patient.street">
+            </md-input-container>
+
+            <md-input-container md-no-float class="md-block">
+              <label>Colonia</label>
+              <input required ng-model="rdc.patient.neighborhood">
+            </md-input-container>
+
+            <div layout-gt-sm="row">
+              <md-input-container class="md-block" flex-gt-sm>
+                <label>Municipio</label>
+                <input required ng-model="rdc.patient.municipality">
+              </md-input-container>
+
+              <md-input-container class="md-block" flex-gt-sm>
+                <label>Estado</label>
+                <md-select ng-model="rdc.patient.state">
+                  <md-option required ng-repeat="state in rdc.states" value="{{state.abbrev}}">
+                    {{state.abbrev}}
+                  </md-option>
+                </md-select>
+              </md-input-container>
+
+              <md-input-container class="md-block" flex-gt-sm>
+                <label>Código Postal</label>
+                <input name="postalCode" ng-model="rdc.patient.postalCode" ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
+
+                <div ng-messages="userForm.postalCode.$error" role="alert" multiple>
+                  <div ng-message="required" class="my-message">You must supply a postal code.</div>
+                  <div ng-message="pattern" class="my-message">That doesn't look like a valid postal code.
+                  </div>
+                  <div ng-message="md-maxlength" class="my-message">
+                    Don't use the long version silly...we don't need to be that specific...
+                  </div>
+                </div>
+              </md-input-container>
+            </div>
+
+            <!--<div layout-gt-sm="row">
+              <div flex="35">
+              </div>
+              <md-button type='submit' flex-gt-sm="30" flex class="md-raised md-primary">Agregar Nuevo Paciente</md-button>
+              <div flex="35">
+              </div>
+            </div>-->
+
+          </form>
         </md-content>
       </md-tab>
+
       <md-tab label="Antecedentes">
         <md-content class="md-padding">
           <h1 class="md-display-2">Antecedentes</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi. Aliquam erat volutpat. Nam placerat, tortor in ultrices porttitor, orci enim rutrum enim, vel tempor sapien arcu a tellus. Vivamus convallis sodales ante varius gravida. Curabitur a purus vel augue ultrices ultricies id a nisl. Nullam malesuada consequat diam, a facilisis tortor volutpat et. Sed urna dolor, aliquet vitae posuere vulputate, euismod ac lorem. Sed felis risus, pulvinar at interdum quis, vehicula sed odio. Phasellus in enim venenatis, iaculis tortor eu, bibendum ante. Donec ac tellus dictum neque volutpat blandit. Praesent efficitur faucibus risus, ac auctor purus porttitor vitae. Phasellus ornare dui nec orci posuere, nec luctus mauris semper.</p>
-          <p>Morbi viverra, ante vel aliquet tincidunt, leo dolor pharetra quam, at semper massa orci nec magna. Donec posuere nec sapien sed laoreet. Etiam cursus nunc in condimentum facilisis. Etiam in tempor tortor. Vivamus faucibus egestas enim, at convallis diam pulvinar vel. Cras ac orci eget nisi maximus cursus. Nunc urna libero, viverra sit amet nisl at, hendrerit tempor turpis. Maecenas facilisis convallis mi vel tempor. Nullam vitae nunc leo. Cras sed nisl consectetur, rhoncus sapien sit amet, tempus sapien.</p>
-          <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+
+          <md-card>
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">Familiares</span>
+              </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+
+              <md-input-container class="md-block">
+                <textarea ng-model="user.biography" md-maxlength="300" rows="5" md-select-on-focus></textarea>
+              </md-input-container>
+
+            </md-card-content>
+            <md-card-actions layout="row" layout-align="end center">
+              <md-button>Guardar</md-button>
+            </md-card-actions>
+          </md-card>
+
+          <md-card>
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">Perinatales</span>
+              </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+
+              <md-input-container class="md-block">
+                <textarea ng-model="user.biography" md-maxlength="300" rows="5" md-select-on-focus></textarea>
+              </md-input-container>
+
+            </md-card-content>
+            <md-card-actions layout="row" layout-align="end center">
+              <md-button>Guardar</md-button>
+            </md-card-actions>
+          </md-card>
+
+          <md-card>
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">Patologicos</span>
+              </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+
+              <md-input-container class="md-block">
+                <textarea ng-model="user.biography" md-maxlength="300" rows="5" md-select-on-focus></textarea>
+              </md-input-container>
+
+            </md-card-content>
+            <md-card-actions layout="row" layout-align="end center">
+              <md-button>Guardar</md-button>
+            </md-card-actions>
+          </md-card>
+
+          <md-card>
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">No patologicos</span>
+              </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+
+              <md-input-container class="md-block">
+                <textarea ng-model="user.biography" md-maxlength="300" rows="5" md-select-on-focus></textarea>
+              </md-input-container>
+
+            </md-card-content>
+            <md-card-actions layout="row" layout-align="end center">
+              <md-button>Guardar</md-button>
+            </md-card-actions>
+          </md-card>
+
+          <md-card>
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">Alergias</span>
+              </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+
+              <md-input-container class="md-block">
+                <textarea ng-model="user.biography" md-maxlength="300" rows="5" md-select-on-focus></textarea>
+              </md-input-container>
+
+            </md-card-content>
+            <md-card-actions layout="row" layout-align="end center">
+              <md-button>Guardar</md-button>
+            </md-card-actions>
+          </md-card>
+
+
         </md-content>
       </md-tab>
+
       <md-tab label="Historial Médico">
         <md-content class="md-padding">
           <h1 class="md-display-2">Historial Médico</h1>
-          <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+          <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi
+            eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc.
+            Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo
+            lectus.
+          </p>
         </md-content>
       </md-tab>
     </md-tabs>

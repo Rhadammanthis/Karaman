@@ -1,5 +1,8 @@
 'use strict'
 
+var Firebase = require('firebase');
+var _ = require('lodash');
+
 import CookiesBase from '../base/CookiesBase';
 /**
  * @class Clase base que ayuda a realizar las funciones bases de cualquier pagina web
@@ -233,19 +236,31 @@ export default class TablaBase extends CookiesBase{
     public on(fun:Function){
         let _this = this;
         console.log('About to get ' + this.url);
-        this._promise = this._$http.get(this.url).then(function(respuesta){
-            _this._lista = respuesta.data[_this.nameArray];
-            // _this.dataSaveTemp[_this._page.toString()] = respuesta.data[_this.nameArray];
-            if(respuesta.data.hasOwnProperty('total')){
-                _this._setTotal(respuesta.data.total);
-            }else{
-                _this._setTotal(_this._lista.length);
-            }
-            fun(respuesta);
-        }).catch(function(err){
-            console.log(err);
-            _this.error(err);
-        });
+
+        // this._promise = this._$http.get(this.url).then(function(respuesta){
+        //     _this._lista = respuesta.data[_this.nameArray];
+        //     console.log(respuesta.data[_this.nameArray]);
+        //     // _this.dataSaveTemp[_this._page.toString()] = respuesta.data[_this.nameArray];
+        //     if(respuesta.data.hasOwnProperty('total')){
+        //         _this._setTotal(respuesta.data.total);
+        //     }else{
+        //         _this._setTotal(_this._lista.length);
+        //     }
+        //     console.log('in TablaBase');
+        //     fun(respuesta);
+        // }).catch(function(err){
+        //     console.log(err);
+        //     _this.error(err);
+        // });
+        this._promise = Firebase.database().ref(`/users/6a32AMsmWqfbxAyJoDXDa1JLUYp1/patients`)
+            .on('value', snapshot => {
+                console.log(snapshot.val())
+                _this._lista = _.values(snapshot.val())
+                 _this._setTotal(_this._lista.length);
+                console.log('in TablaBase');
+                console.log(_this._lista);
+            });
+
     }
 
     /**

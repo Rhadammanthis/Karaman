@@ -2,7 +2,7 @@
 <div layout="row" layout-align="start start">
 </div>
 <div>
-    <md-table-container>
+    <md-table-container >
         <table md-table ng-model="hmc._selected" md-row-select="hmc._selection" multiple="hmc._multiSelection" md-progress="hmc._promise">
             <thead md-head md-order="hmc._order">
                 <tr md-row>
@@ -29,7 +29,8 @@
             </tbody>
         </table>
     </md-table-container>
-    <md-table-pagination md-boundary-links="hmc._boundary" 
+    <md-table-pagination 
+                         md-boundary-links="hmc._boundary" 
                          md-limit-options="hmc._limitOption" 
                          md-label="{{hmc._label}}" 
                          md-limit="hmc._limit" 

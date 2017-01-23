@@ -12,9 +12,12 @@ export class HomeComponent extends Base{
 	$location: any;
 	$mdDialog: any;
 	$mdMedia: any;
+  $cookies: any;
 	login: any = {};
 	Auth: any;
 	$rootScope: any;
+
+  patient;
 
   /*@ngInject*/
   constructor($rootScope, $scope, $cookies, $http, $location, $mdDialog, $mdMedia, Auth) {
@@ -23,6 +26,7 @@ export class HomeComponent extends Base{
     this.$location = $location;
     this.$mdDialog = $mdDialog;
     this.$mdMedia = $mdMedia;
+    this.$cookies = $cookies;
 	this.Auth = Auth;
 	this.$rootScope = $rootScope;
 
@@ -32,6 +36,10 @@ export class HomeComponent extends Base{
 
     $onInit(){
       this.setToolbarMode(1);
+
+      this.patient = JSON.parse(this.$cookies.get('patient'));
+
+      console.log(this.patient);
     }
 }
 

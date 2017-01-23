@@ -8,7 +8,6 @@ import 'angular-socket-io';
 const ngRoute = require('angular-route');
 const ngMaterial = require('angular-material');
 const ngAngularLoadingbar = require('angular-loading-bar')
-const ngResponsiveParallax = require('angular-responsive-parallax')
 const ngTable = require('angular-material-data-table');
 const angularGrid = require('angularGrid');
 
@@ -42,7 +41,6 @@ angular.module('colmorovApp', [
   ngMaterial,
   ngTable,
   ngAngularLoadingbar,
-  ngResponsiveParallax,
   angularGrid,
 
   _Auth,
