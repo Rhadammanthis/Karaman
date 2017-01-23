@@ -2,50 +2,41 @@
 const angular = require('angular');
 const ngRoute = require('angular-route');
 const firebase = require("firebase");
-var _ = require('lodash');
 
-import routes from './home.route';
+import routes from './login.route';
 import Base from '../../components/object/base/Base';
 import TablaBase from '../../components/object/base/TablaBase';
 
-export class HomeComponent extends TablaBase {
+export class LoginComponent extends Base {
   $http: any;
   $location: any;
   $mdDialog: any;
   $mdMedia: any;
   $cookies: any;
-  login: any = {};
-  Auth: any;
   $rootScope: any;
+  $route
+  userData: any = {};
+  attemptingLogIn: boolean = false;
 
-  pics;
-  message = "Hola";
-
-  public patients: any = [];
-
-  angularGridInstance
 
   /*@ngInject*/
-  constructor($rootScope, $scope, $cookies, $http, $location, $mdDialog, $mdMedia, Auth, angularGridInstance) {
-    super($rootScope, $scope, $cookies, 'api/patients', {}, $http, 'patients');
+  constructor($rootScope, $scope, $cookies, $http, $location, $mdDialog, $mdMedia, $route, Auth, angularGridInstance) {
+    super($rootScope);
     this.$http = $http;
     this.$location = $location;
     this.$mdDialog = $mdDialog;
     this.$mdMedia = $mdMedia;
     this.$cookies = $cookies;
-    this.Auth = Auth;
-    this.angularGridInstance = angularGridInstance;
     this.$rootScope = $rootScope;
+    this.$route = $route;
 
     this.setTitle('Karaman');
   }
 
 
   $onInit() {
-    this.setToolbarMode(2);
+    this.setToolbarMode(4);
     var _this = this;
-    super.$onInit();
-    this.initCallback();
 
     // Initialize Firebase
     // TODO: Replace with your project's customized code snippet
@@ -61,26 +52,38 @@ export class HomeComponent extends TablaBase {
       firebase.initializeApp(config);
     }
 
-
-    this.on(error => {
-      _this.showAlert(error);
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        // User is signed in.
+        console.log(user)
+        _this.$route.reload();
+        _this.$location.path('/home');
+        
+      } else {
+        // No user is signed in.
+      }
     });
 
   }
 
-  public initCallback() {
-    var _this = this;
-    this.setReadyF(function (result) {
-      console.log('Siguiente ready', result);
-    });
-    this.setErrorF(function (error) {
-      console.log('Siguiente error', error);
-    });
-    this.setSelectF(function (item) {
-      console.log('Selected', item);
-      this.$cookies.put('patient', JSON.stringify(item));
-      _this.$location.path('/records');
-    })
+  atemptLogin(event) {
+    console.log(this.userData)
+    this.attemptingLogIn = true;
+    const _this = this;
+    firebase.auth().signInWithEmailAndPassword(this.userData.email, this.userData.password)
+      .then(user => {
+        console.log("Succe!")
+        console.log(user);
+        _this.attemptingLogIn = false;
+        _this.$route.reload();
+        _this.$location.path('/home');
+        // console.log(user)
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log('I am error')
+        _this.showAlert("Nombre o contraseña incorrectos");
+      });
   }
 
   showAlert = function (text) {
@@ -95,15 +98,16 @@ export class HomeComponent extends TablaBase {
         .ok('Aceptar')
     );
   };
+
 }
 
 
-export default angular.module('colmorovApp.adminlogin', [ngRoute])
+export default angular.module('colmorovApp.login', [ngRoute])
   .config(routes)
-  .component('home', {
-    template: require('./home.html'),
-    css: require('./home.css'),
-    controller: HomeComponent,
-    controllerAs: 'hmc'
+  .component('login', {
+    template: require('./login.html'),
+    css: require('./login.css'),
+    controller: LoginComponent,
+    controllerAs: 'lgc'
   })
   .name;

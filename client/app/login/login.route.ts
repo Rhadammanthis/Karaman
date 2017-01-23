@@ -3,7 +3,7 @@
 export default function($routeProvider) {
   'ngInject';
   $routeProvider
-    .when('/home', {
-      template: '<home></home>'
+    .when('/', {
+      template: '<login></login>'
     });
 }

@@ -25,6 +25,7 @@ import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
 import patients from './patient';
 import home from './home/home.component';
+import login from './login/login.component';
 import records from './records/records.component';
 
 
@@ -47,6 +48,7 @@ angular.module('colmorovApp', [
   navbar,
   patients,
   home,
+  login,
   records,
   footer,
   constants,

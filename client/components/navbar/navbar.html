@@ -47,6 +47,14 @@
 		</div>
   </md-toolbar>
 
+		<md-toolbar ng-if="nav._$rootScope.toolbarMode === 4">
+		<div class="md-toolbar-tools">
+			<h2>
+				<span>{{nav._$rootScope.title}}</span>
+			</h2>
+		</div>
+  </md-toolbar>
+
 	<div id="loading-bar-container"></div>
   
 	<md-sidenav class="md-sidenav-left md-whiteframe-6dp" md-component-id='left'>
