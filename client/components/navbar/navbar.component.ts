@@ -1,6 +1,7 @@
 'use strict';
 /* eslint no-sync: 0 */
 const angular = require('angular');
+const firebase = require('firebase');
 
 import Base from '../object/base/Base';
 import {ModeToolbar} from '../object/base/Base';
@@ -74,7 +75,9 @@ export class NavbarComponent extends Base{
 
   logOut(){
     this.$mdSidenav('left').close();
-    this.Auth.logout();
+
+    firebase.auth().signOut()
+
     this.setToolbarMode(0);
     this.$location.path('/');
   }

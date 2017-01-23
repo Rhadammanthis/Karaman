@@ -251,7 +251,7 @@ export default class TablaBase extends CookiesBase {
                     });
             } else {
                 // No user is signed in.
-                fun('Se ha producido un error');
+                // fun('Se ha producido un error');
             }
         });
 
