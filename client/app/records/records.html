@@ -4,12 +4,12 @@
       <md-tab label="Ficha de Identificación">
         <md-content class="md-padding">
           <h1 class="md-display-2">Ficha de Identificación</h1>
-          <form ng-submit='rdc.registerNewPatient()' name="userForm">
+          <form ng-submit='rdc.updatePatient(rdc.patient.uid)' name="userForm">
 
             <div layout-gt-sm="row">
               <md-input-container class="md-block" flex-gt-sm>
                 <label>Nomber(s)</label>
-                <input required ng-model="rdc.patient.name">
+                <input required name="name" ng-model="rdc.patient.name">
               </md-input-container>
 
               <md-input-container class="md-block" flex-gt-sm>
@@ -26,7 +26,7 @@
             <div layout-gt-sm="row">
               <md-input-container flex="60">
                 <label>Fecha de nacimiento</label>
-                <md-datepicker required ng-model="rdc.patient.dateOfBirth"></md-datepicker>
+                <md-datepicker required ng-model="rdc.dateOfBirth"></md-datepicker>
               </md-input-container>
 
               <md-radio-group required ng-model="rdc.patient.sex" flex="50">
@@ -66,7 +66,7 @@
               <md-input-container class="md-block" flex-gt-sm>
                 <label>Estado</label>
                 <md-select ng-model="rdc.patient.state">
-                  <md-option required ng-repeat="state in rdc.states" value="{{state.abbrev}}">
+                  <md-option required  ng-repeat="state in rdc.states" value="{{state.abbrev}}">
                     {{state.abbrev}}
                   </md-option>
                 </md-select>
@@ -77,8 +77,8 @@
                 <input name="postalCode" ng-model="rdc.patient.postalCode" ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
 
                 <div ng-messages="userForm.postalCode.$error" role="alert" multiple>
-                  <div ng-message="required" class="my-message">You must supply a postal code.</div>
-                  <div ng-message="pattern" class="my-message">That doesn't look like a valid postal code.
+                  <div ng-message="required" class="my-message">Tienes que proporcionar un codigo postal valido.</div>
+                  <div ng-message="pattern" class="my-message">Codigo pstal invalido
                   </div>
                   <div ng-message="md-maxlength" class="my-message">
                     Don't use the long version silly...we don't need to be that specific...
@@ -87,13 +87,13 @@
               </md-input-container>
             </div>
 
-            <!--<div layout-gt-sm="row">
+            <div layout-gt-sm="row">
               <div flex="35">
               </div>
-              <md-button type='submit' flex-gt-sm="30" flex class="md-raised md-primary">Agregar Nuevo Paciente</md-button>
+              <md-button type='submit' ng-disabled="!userForm.$dirty" flex-gt-sm="30" flex class="md-raised md-primary">Guardar cambios</md-button>
               <div flex="35">
               </div>
-            </div>-->
+            </div>
 
           </form>
         </md-content>

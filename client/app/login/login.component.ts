@@ -36,21 +36,8 @@ export class LoginComponent extends Base {
 
   $onInit() {
     this.setToolbarMode(4);
+    super.$onInit();
     var _this = this;
-
-    // Initialize Firebase
-    // TODO: Replace with your project's customized code snippet
-    var config = {
-      apiKey: "AIzaSyD3oAIor2nYstgPRZulPxYIkky8cHlwEW4",
-      authDomain: "colmorov.firebaseapp.com",
-      databaseURL: "https://colmorov.firebaseio.com",
-      storageBucket: "colmorov.appspot.com",
-      messagingSenderId: "682480538484"
-    };
-
-    if (firebase.apps.length === 0) {
-      firebase.initializeApp(config);
-    }
 
     firebase.auth().onAuthStateChanged(function (user) {
       if (user) {

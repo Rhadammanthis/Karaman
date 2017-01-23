@@ -1,6 +1,6 @@
 'use strict'
 
-var Firebase = require('firebase');
+var firebase = require('firebase');
 var _ = require('lodash');
 
 import CookiesBase from '../base/CookiesBase';
@@ -203,7 +203,17 @@ export default class TablaBase extends CookiesBase {
     }
 
     $onInit() {
+        var config = {
+            apiKey: "AIzaSyD3oAIor2nYstgPRZulPxYIkky8cHlwEW4",
+            authDomain: "colmorov.firebaseapp.com",
+            databaseURL: "https://colmorov.firebaseio.com",
+            storageBucket: "colmorov.appspot.com",
+            messagingSenderId: "682480538484"
+        };
 
+        if (firebase.apps.length === 0) {
+            firebase.initializeApp(config);
+        }
     }
 
     public update() {
@@ -237,14 +247,18 @@ export default class TablaBase extends CookiesBase {
         let _this = this;
         console.log('About to get ' + this.url);
 
-        Firebase.auth().onAuthStateChanged(function (user) {
+        firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
                 // User is signed in.
                 console.log(user)
-                _this._promise = Firebase.database().ref(`/users/${user.uid}/patients`)
-                    .once('value').then( snapshot => {
+                _this._promise = firebase.database().ref(`/users/${user.uid}/patients`)
+                    .once('value').then(snapshot => {
                         console.log(snapshot.val())
-                        _this._lista = _.values(snapshot.val())
+                        _this._lista = _.map(snapshot.val(), (val, index) => {
+                            var newVal = val;
+                            newVal.uid = index;
+                            return newVal;
+                        });
                         _this._setTotal(_this._lista.length);
                         console.log('in TablaBase');
                         console.log(_this._lista);

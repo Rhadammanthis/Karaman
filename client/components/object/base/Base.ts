@@ -1,8 +1,11 @@
 'use strict'
+
+const firebase = require('firebase');
+
 /**
  * @class Clase base que ayuda a realizar las funciones bases de cualquier pagina web
  */
-export default class Base{
+export default class Base {
 
     /**
      * @field _$rootScope
@@ -13,9 +16,23 @@ export default class Base{
      * @constructor 
      * @param _$rootScope
      */
-    constructor($rootScope:any){
+    constructor($rootScope: any) {
         'ngInject';
         this._$rootScope = $rootScope;
+    }
+
+    $onInit() {
+        var config = {
+            apiKey: "AIzaSyD3oAIor2nYstgPRZulPxYIkky8cHlwEW4",
+            authDomain: "colmorov.firebaseapp.com",
+            databaseURL: "https://colmorov.firebaseio.com",
+            storageBucket: "colmorov.appspot.com",
+            messagingSenderId: "682480538484"
+        };
+
+        if (firebase.apps.length === 0) {
+            firebase.initializeApp(config);
+        }
     }
 
     /**
@@ -23,7 +40,7 @@ export default class Base{
      * @param title
      * @type String
      */
-    public setTitle(title:String){
+    public setTitle(title: String) {
         this._$rootScope.title = title;
     }
 
@@ -32,28 +49,28 @@ export default class Base{
      * @param mode
      * @type ModeToolbar
      */
-    public setModeToolbar(mode:ModeToolbar){
+    public setModeToolbar(mode: ModeToolbar) {
         this._$rootScope.show = mode;
     }
 
     /**
      * Seleccionar el menu tipo acreditado/cliente
      */
-    public setMenuCl(){
+    public setMenuCl() {
         this._$rootScope.menu = 'cl';
     }
 
     /**
      * Seleccionar el menu tipo apersonal empresa
      */
-    public setMenuPe(){
+    public setMenuPe() {
         this._$rootScope.menu = 'pe';
     }
 
     /**
      * Sets the toolbar mode to use
      */
-    public setToolbarMode(mode){
+    public setToolbarMode(mode) {
         this._$rootScope.toolbarMode = mode;
     }
 
@@ -62,7 +79,7 @@ export default class Base{
 /**
  * @class Enum que permite saber el Modo del Tolbar a mostar
  */
-export const enum ModeToolbar{
+export const enum ModeToolbar {
     /**
      * Ocultar el toolbar
      */

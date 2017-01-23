@@ -1,7 +1,7 @@
 'use strict'
 
 const angular = require('angular');
-const Firebase = require('firebase');
+const firebase = require('firebase');
 const moment = require('moment');
 
 import Base from '../../../components/object/base/Base';
@@ -26,10 +26,11 @@ class RegisterPatientController extends Base {
 
     dateOfBirth = new Date();
 
-    states = ('Ags. B.C. B.C.S. Camp. Chis. Chih. Coah. Col. CDMX Dgo. Gto. Gro. Hgo. Jal. Edomex. Mich. Mor. Nay. N.L. Oax. Pue. Qro. Q.R. S.L.P. ' +
-        'Sin. Son. Tab. Tamps. Tlax. Ver. Yuc. Zac.').split(' ').map(function (state) {
-            return { abbrev: state };
-        });
+    states = ('Aguascalientes+Baja California+Baja California Sur+Campeche+Chiapas+Chihuahua+Coahuila+Colima+CDMX+Durango+Guanajuato+Guerrero' +
+  '+Hidalgo+Jalisco+Estado de México+Michoacan+Morelos+Nayarit+Nuevo León+Oaxaca+Puebla+Queretaro+Quintana Roo+San Luis Potosí+' +
+    'Sinaloa+Sonora+Tabasco+Tamaulipas+Tlaxcala+Veracruz+Yucatán+Zacatecas').split('+').map(function (state) {
+      return { abbrev: state };
+    });
 
     constructor($rootScope, $http, $location, $mdDialog, Auth, $cookies, Crypto) {
 
@@ -48,45 +49,23 @@ class RegisterPatientController extends Base {
     }
 
     $onInit() {
-
         this.setToolbarMode(1);
+        super.$onInit();
     }
 
     registerNewPatient() {
         var _this = this;
-        // this.$http.post('api/patients/new', this.patient).then(function (result) {
-        //     if (result) {
-        //         _this.showAlert(result);
-        //     }
-        // });
 
-        // Firebase.auth().signInWithEmailAndPassword('hugo@hugo.com', 'Idspispopd9')
-        //     .then(user => {
-        //         console.log('User auth!');
-        //         Firebase.database().ref(`/users/6a32AMsmWqfbxAyJoDXDa1JLUYp1/patients`)
-        //             .push(this.patient)
-        //             .then(() => {
-        //                 console.log('Created!')
-        //             });
-        //     })
-        //     .catch((error) => {
-        //         console.log(error);
-
-        //         // firebase.auth().createUserWithEmailAndPassword(email, password)
-        //         //     .then(user => loginUserSucces(dispatch, user))
-        //         //     .catch(() => loginUserFailed(dispatch));
-        //     });
-
-        this.patient.dateofBirth = moment(this.dateOfBirth).format('DD-MM-YYYY');
-        Firebase.database().ref(`/users/6a32AMsmWqfbxAyJoDXDa1JLUYp1/patients`)
+        this.patient.dateOfBirth = this.dateOfBirth.getTime();
+        firebase.database().ref(`/users/6a32AMsmWqfbxAyJoDXDa1JLUYp1/patients`)
             .push(this.patient)
             .then(() => {
-                _this.showAlert(result);
+                _this.showAlert();
                 console.log('Created!')
             });
     }
 
-    showAlert = function (ev) {
+    showAlert = function () {
         var _this = this;
         this.$mdDialog.show(
             _this.$mdDialog.alert()
