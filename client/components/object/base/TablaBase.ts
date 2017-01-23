@@ -242,7 +242,7 @@ export default class TablaBase extends CookiesBase {
                 // User is signed in.
                 console.log(user)
                 _this._promise = Firebase.database().ref(`/users/${user.uid}/patients`)
-                    .on('value', snapshot => {
+                    .once('value').then( snapshot => {
                         console.log(snapshot.val())
                         _this._lista = _.values(snapshot.val())
                         _this._setTotal(_this._lista.length);
