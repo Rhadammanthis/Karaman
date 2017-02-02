@@ -16,6 +16,7 @@ export class HomeComponent extends Base {
   $rootScope: any;
 
   patient;
+  background;
   dataChanged: boolean = false;
   dateOfBirth;
 
@@ -40,19 +41,23 @@ export class HomeComponent extends Base {
 
 
   $onInit() {
-    this.setToolbarMode(1);
+    this.setToolbarMode(5);
     super.$onInit();
 
     this.patient = JSON.parse(this.$cookies.get('patient'));
+    console.log(this.patient.dateOfBirth);
     this.dateOfBirth = new Date(this.patient.dateOfBirth);
     console.log(this.dateOfBirth);
 
+    delete this.patient.$$hashKey;
     console.log(this.patient);
+    console.log(this.patient.background.familiar);
+    console.log(this.patient.background.perinatal);
   }
 
   updatePatient(uid) {
     const _this = this;
-    delete _this.patient.$$hashKey;
+    // delete _this.patient.$$hashKey;
     firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
         firebase.database().ref(`/users/${user.uid}/patients/${uid}`)

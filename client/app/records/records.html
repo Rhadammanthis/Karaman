@@ -112,12 +112,12 @@
             <md-card-content>
 
               <md-input-container class="md-block">
-                <textarea ng-model="user.biography" md-maxlength="300" rows="5" md-select-on-focus></textarea>
+                <textarea ng-model="rdc.patient.background.familiar" md-maxlength="300" rows="5" md-select-on-focus></textarea>
               </md-input-container>
 
             </md-card-content>
             <md-card-actions layout="row" layout-align="end center">
-              <md-button>Guardar</md-button>
+              <md-button ng-disabled="!rdc.patient.background.familiar" ng-click="rdc.updatePatient(rdc.patient.uid)" class="md-raised md-primary">Guardar</md-button>
             </md-card-actions>
           </md-card>
 
@@ -130,12 +130,12 @@
             <md-card-content>
 
               <md-input-container class="md-block">
-                <textarea ng-model="user.biography" md-maxlength="300" rows="5" md-select-on-focus></textarea>
+                <textarea ng-model="rdc.patient.background.perinatal" md-maxlength="300" rows="5" md-select-on-focus></textarea>
               </md-input-container>
 
             </md-card-content>
             <md-card-actions layout="row" layout-align="end center">
-              <md-button>Guardar</md-button>
+              <md-button ng-disabled="!rdc.patient.background.perinatal" ng-click="rdc.updatePatient(rdc.patient.uid)" class="md-raised md-primary">Guardar</md-button>
             </md-card-actions>
           </md-card>
 
@@ -148,12 +148,12 @@
             <md-card-content>
 
               <md-input-container class="md-block">
-                <textarea ng-model="user.biography" md-maxlength="300" rows="5" md-select-on-focus></textarea>
+                <textarea ng-model="rdc.patient.background.pathological" md-maxlength="300" rows="5" md-select-on-focus></textarea>
               </md-input-container>
 
             </md-card-content>
             <md-card-actions layout="row" layout-align="end center">
-              <md-button>Guardar</md-button>
+              <md-button ng-disabled="!rdc.patient.background.pathological" ng-click="rdc.updatePatient(rdc.patient.uid)" class="md-raised md-primary">Guardar</md-button>
             </md-card-actions>
           </md-card>
 
@@ -166,12 +166,12 @@
             <md-card-content>
 
               <md-input-container class="md-block">
-                <textarea ng-model="user.biography" md-maxlength="300" rows="5" md-select-on-focus></textarea>
+                <textarea ng-model="rdc.patient.background.nonPathological" md-maxlength="300" rows="5" md-select-on-focus></textarea>
               </md-input-container>
 
             </md-card-content>
             <md-card-actions layout="row" layout-align="end center">
-              <md-button>Guardar</md-button>
+              <md-button ng-disabled="!rdc.patient.background.nonPathological" ng-click="rdc.updatePatient(rdc.patient.uid)" class="md-raised md-primary">Guardar</md-button>
             </md-card-actions>
           </md-card>
 
@@ -184,12 +184,12 @@
             <md-card-content>
 
               <md-input-container class="md-block">
-                <textarea ng-model="user.biography" md-maxlength="300" rows="5" md-select-on-focus></textarea>
+                <textarea ng-model="rdc.patient.background.allergical" md-maxlength="300" rows="5" md-select-on-focus></textarea>
               </md-input-container>
 
             </md-card-content>
             <md-card-actions layout="row" layout-align="end center">
-              <md-button>Guardar</md-button>
+              <md-button ng-disabled="!rdc.patient.background.allergical" ng-click="rdc.updatePatient(rdc.patient.uid)" class="md-raised md-primary">Guardar</md-button>
             </md-card-actions>
           </md-card>
 

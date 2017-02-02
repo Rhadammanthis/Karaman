@@ -47,6 +47,8 @@ export class HomeComponent extends TablaBase {
     super.$onInit();
     this.initCallback();
 
+    this.$cookies.remove('patient');
+
     this.on(error => {
       _this.showAlert(error);
     });

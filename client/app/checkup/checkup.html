@@ -1,0 +1,110 @@
+<div>
+    <md-content layout-padding>
+        <div layout="column">
+            <h1> Información del Paciente </h1>
+
+            <md-card class="md-whiteframe-5dp" flex="100">
+                <md-card-content>
+                    <div ng-hide="cuc.patient" layout="column" flex>
+                        <h4>Nombre del paciente</h4>
+                        <md-select placeholder="Nombre" ng-model="cuc.patient" md-on-open="cuc.loadPatients()" md-on-close="cuc.processPatientData()">
+                            <md-option ng-value="patient" ng-repeat="patient in cuc.patients">{{patient.name + " " + patient.parentalLastName + " " + patient.maternalLastName}}</md-option>
+                        </md-select>
+                    </div>
+
+                    <div ng-show="cuc.patient" layout="column" class="info-container md-block" flex>
+                        <h4>Nombre del paciente</h4>
+                        {{cuc.patient.name + " " + cuc.patient.parentalLastName + " " + cuc.patient.maternalLastName}}
+                    </div>
+
+                    <div layout="column" layout-gt-sm="row">
+                        <div layout="column" flex>
+                            <div layout="column" class="info-container md-block" flex-gt-sm>
+                                <h4>Fecha de nacimiento</h4>
+                                {{ cuc.patient.dateOfBirth | date: 'dd/MM/yyyy' }}
+                            </div>
+                        </div>
+                        <md-divider md-inset ng-if="!$last"></md-divider>
+
+                        <div layout="column" flex>
+                            <div layout="column" class="info-container md-block" flex-gt-sm>
+                                <h4>Edad</h4>
+                                {{ cuc.patientAge }}
+                            </div>
+                        </div>
+                        <md-divider md-inset ng-if="!$last"></md-divider>
+
+                        <div layout="column" flex>
+                            <div layout="column" class="info-container md-block" flex-gt-sm>
+                                <h4>Fecha actual</h4>
+                                {{ cuc.todaysDate | date: 'dd/MM/yyyy' }}
+                            </div>
+                        </div>
+                    </div>
+                </md-card-content>
+            </md-card>
+
+            <h1> Datos de consulta </h1>
+
+            <div layout="column" layout-gt-sm="row">
+                <md-card class="md-whiteframe-5dp" flex="100" flex-gt-sm="70">
+                    <md-card-content>
+                        <h4>Subjetivo</h4>
+                        <md-input-container class="md-block">
+                            <textarea ng-model="cuc.tempCheckup.data.subjective" rows="5" md-select-on-focus></textarea>
+                        </md-input-container>
+                        <h4>Terapéutica previa</h4>
+                        <md-input-container class="md-block">
+                            <textarea ng-model="cuc.tempCheckup.data.prevTherapeutic" rows="3" md-select-on-focus></textarea>
+                        </md-input-container>
+                        <h4>Objetivo</h4>
+                        <md-input-container class="md-block">
+                            <textarea ng-model="cuc.tempCheckup.data.objective" rows="3" md-select-on-focus></textarea>
+                        </md-input-container>
+                        <h4>Análisis/Diagnostico</h4>
+                        <md-input-container class="md-block">
+                            <textarea ng-model="cuc.tempCheckup.data.analysis" rows="3" md-select-on-focus></textarea>
+                        </md-input-container>
+                        <h4>Plan</h4>
+                        <md-input-container class="md-block">
+                            <textarea ng-model="cuc.tempCheckup.data.plan" rows="3" md-select-on-focus></textarea>
+                        </md-input-container>
+                    </md-card-content>
+                </md-card>
+
+                <md-card class="md-whiteframe-5dp" flex="100" flex-gt-sm="30">
+                    <md-card-content>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Temperatura en °C</label>
+                            <input ng-model="cuc.tempCheckup.data.temperature" type="number">
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>T.A. en mmHg</label>
+                            <input ng-model="cuc.tempCheckup.data.ta" type="number">
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Peso en Kg</label>
+                            <input ng-model="cuc.tempCheckup.data.weight" type="number">
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Talla en cm</label>
+                            <input ng-model="cuc.tempCheckup.data.height" type="number">
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>P.C. en cm</label>
+                            <input ng-model="cuc.tempCheckup.data.pc" type="number">
+                        </md-input-container>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </div>
+    <!--<div ng-hide="ltc.checked" class="animate-show fixed-pos" layout="row">
+        <div flex></div>
+        <md-button style="margin-right:3%;" ng-click="ltc.addNewMovieDialog(ev)" class="md-fab md-primary" aria-label="Use Android">
+            <md-icon md-svg-src="../../assets/icons/ic_add_white_24px.svg"></md-icon>
+        </md-button>
+    </div>-->
+    </md-content>
+
+</div>
+

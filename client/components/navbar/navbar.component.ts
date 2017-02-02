@@ -104,6 +104,10 @@ export class NavbarComponent extends Base{
     this.$location.path('/patient/register');
   }
 
+  newCheckUp(){
+    this.$location.path('/checkup');
+  }
+
   goHome(){
     this.$mdSidenav('left').close();
     this.$location.path('/');
@@ -112,6 +116,19 @@ export class NavbarComponent extends Base{
   goToList(){
     this.$mdSidenav('left').close();
     this.$location.path('/list');
+  }
+
+  action(){
+    this._$rootScope.toolbarAction();
+  }
+
+  secondAction(){
+    this._$rootScope.secondToolbarAction();
+  }
+
+  genericGoBack(){
+    const location = this._$rootScope.genericNavigation;
+    this.$location.path('/' + location);
   }
 
 

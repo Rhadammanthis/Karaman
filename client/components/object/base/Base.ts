@@ -74,6 +74,18 @@ export default class Base {
         this._$rootScope.toolbarMode = mode;
     }
 
+    public setFirstToolbarAction(action) {
+        this._$rootScope.toolbarAction = action;
+    }
+
+    public setSecondToolbarAction(action) {
+        this._$rootScope.secondToolbarAction = action;
+    }
+
+    public setGenericNavigationLocation(location){
+        this._$rootScope.genericNavigation = location;
+    }
+
 }
 
 /**
