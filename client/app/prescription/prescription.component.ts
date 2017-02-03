@@ -9,7 +9,7 @@ import routes from './prescription.route';
 import Base from '../../components/object/base/Base';
 import TablaBase from '../../components/object/base/TablaBase';
 
-export class PrescriptionComponent extends Base {
+class PrescriptionComponent extends Base {
   $http: any;
   $location: any;
   $mdDialog: any;
@@ -17,19 +17,21 @@ export class PrescriptionComponent extends Base {
   $cookies: any;
   $rootScope: any;
   $route
-  $q;
+  $scope;
   patients;
   patient = null;
   todaysDate;
   patientAge;
-  tempCheckup;
+  prescription = "";
   data;
   pageM = 1;
   pageF = 1;
   selected = [];
+  text = ""
+  lol = "value..."
 
   /*@ngInject*/
-  constructor($rootScope, $scope, $cookies, $http, $location, $mdDialog, $mdMedia, $route, $q, Auth, angularGridInstance) {
+  constructor($rootScope, $scope, $cookies, $http, $location, $mdDialog, $mdMedia, $route) {
     super($rootScope);
     this.$http = $http;
     this.$location = $location;
@@ -38,17 +40,17 @@ export class PrescriptionComponent extends Base {
     this.$cookies = $cookies;
     this.$rootScope = $rootScope;
     this.$route = $route;
-    this.$q = $q;
-    this.tempCheckup = {};
+    this.$scope = $scope;
+
+    this.prescription = "Nomads carried trough the times";
 
     this.setTitle('Receta');
   }
 
-  processPatientData(){
-    this.patientAge = Math.abs(new Date( Date.now() - this.patient.dateOfBirth).getUTCFullYear() - 1970);
-    console.log(this.patientAge);
+  addToPrescription(item){
+    console.log(item)
+    this.text += item.name + '\n' + item.body + '\n\n'
   }
-
 
   $onInit() {
     this.setToolbarMode(6);
@@ -60,45 +62,57 @@ export class PrescriptionComponent extends Base {
       treatments:[
         {
           "name":"Gripa",
-          "tecnique": "Comer muchas fresas"
+          "body": "Comer muchas fresas"
         },
         {
           "name":"Tos",
-          "tecnique": "Te con miel de abeja"
+          "body": "Te con miel de abeja"
         },
         {
           "name":"Diarrea",
-          "tecnique": "Comer muchas fresas"
+          "body": "Comer muchas fresas"
         },
         {
           "name":"Dolor de cabeza",
-          "tecnique": "Te con miel de abeja"
+          "body": "Te con miel de abeja"
         },
         {
           "name":"Tuberculosis",
-          "tecnique": "Comer muchas fresas"
+          "body": "Comer muchas fresas"
         },
         {
           "name":"Polio",
-          "tecnique": "Te con miel de abeja"
+          "body": "Te con miel de abeja"
         },
         {
           "name":"SIDA",
-          "tecnique": "Comer muchas fresas"
+          "body": "Comer muchas fresas"
         },
         {
           "name":"Cancer",
-          "tecnique": "Te con miel de abeja"
+          "body": "Te con miel de abeja"
         }
       ],
       meds:[
         {
           "name": "Prozac",
-          "dosage": "10 pills"
+          "body": "10 pills"
         },
         {
           "name": "Nyquil",
-          "dosage": "1 pill"
+          "body": "1 pill"
+        },
+        {
+          "name": "Tylenol",
+          "body": "1 pill"
+        },
+        {
+          "name": "Aderall",
+          "body": "1 pill"
+        },
+        {
+          "name": "Xanax",
+          "body": "1 pill"
         }
       ]
 
@@ -123,9 +137,7 @@ export class PrescriptionComponent extends Base {
 
   }
 
-  logItem = function (item) {
-    console.log(item.name, 'was selected');
-  };
+
 
   loadPatients = function () {
       const _this = this;
@@ -169,6 +181,6 @@ export default angular.module('colmorovApp.prescription', [ngRoute])
     template: require('./prescription.html'),
     css: require('./prescription.css'),
     controller: PrescriptionComponent,
-    controllerAs: 'cuc'
+    controllerAs: 'ptc'
   })
 .name;

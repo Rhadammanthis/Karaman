@@ -47,6 +47,7 @@ table.md-table.md-row-select td.md-cell:first-child, table.md-table.md-row-selec
 @import 'main/home/home.css';
 @import 'main/main.css';
 @import 'main/signup/signup.css';
+@import 'prescription/prescription.css';
 @import '../components/footer/footer.css';
 @import '../components/navbar/navbar.css';
 @import '../components/oauth-buttons/oauth-buttons.css';

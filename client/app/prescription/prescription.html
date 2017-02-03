@@ -1,10 +1,9 @@
-<md-content layout-padding>
+<md-content layout-padding >
     <div layout="column" layout-gt-sm="row">
-
         <md-card class="md-whiteframe-5dp" flex="100" flex-gt-sm="65">
             <md-card-content>
-                <md-input-container style="overflow-x: hidden; overflow-y: scroll; height: 400px;" class="md-block">
-                    <textarea ng-model="cuc.tempCheckup.data.analysis" rows="22" md-select-on-focus></textarea>
+                <md-input-container style="overflow-x: hidden; overflow-y: scroll; height: 850px; " class="md-block">
+                    <textarea ng-model="ptc.text" rows="48"></textarea>
                 </md-input-container>
             </md-card-content>
         </md-card>
@@ -19,7 +18,7 @@
 
                 <md-card-content>
                     <md-table-container >
-                        <table md-table ng-model="cuc.selected" md-row-select="true" multiple="hmc._multiSelection" md-progress="hmc._promise">
+                        <table md-table ng-model="ptc.selected" md-row-select="true"  md-progress="hmc._promise">
                             <thead md-head md-order="hmc._order">
                                 <tr md-row>
                                     <th md-column ><span>Nombre</span></th>
@@ -28,8 +27,8 @@
                             </thead>
 
                             <tbody md-body>
-                                <tr md-row md-select="manejo"  md-auto-select="true" md-row-select="hmc._rowSelection" md-on-select="cuc.logItem" 
-                                    ng-repeat="manejo in cuc.data.treatments | limitTo: 5 : (cuc.pageM -1) * 5">
+                                <tr md-row md-select="manejo"   md-auto-select="true" md-row-select="hmc._rowSelection" ng-click="ptc.addToPrescription(manejo)" 
+                                    ng-repeat="manejo in ptc.data.treatments | limitTo: 5 : (ptc.pageM -1) * 5">
                                     <td md-cell>
                                         {{manejo.name}}
                                     </td>
@@ -41,9 +40,8 @@
                         </table>
                     </md-table-container>
 
-                    <md-table-pagination md-limit="5" md-page="cuc.pageM" md-total="8" md-page-select="true" md-boundary-links="false" md-on-paginate="logPagination"></md-table-pagination>
+                    <md-table-pagination md-limit="5" md-page="ptc.pageM" md-total="8" md-page-select="true" md-boundary-links="false" md-on-paginate="logPagination"></md-table-pagination>
                 </md-card-content>
-
             </md-card>
 
             <md-card class="md-whiteframe-5dp" >
@@ -55,7 +53,7 @@
 
                 <md-card-content>
                     <md-table-container >
-                        <table md-table ng-model="cuc.selected" md-row-select="hmc._selection" multiple="hmc._multiSelection" md-progress="hmc._promise">
+                        <table md-table ng-model="ptc.selected" md-row-select="true"  md-progress="hmc._promise">
                             <thead md-head md-order="hmc._order">
                                 <tr md-row>
                                     <th md-column ><span>Nombre</span></th>
@@ -64,8 +62,8 @@
                             </thead>
                             
                             <tbody md-body>
-                                <tr md-row md-select="med" y md-auto-select="hmc._autoSelection" ng-click="hmc.showMessages(patient)" md-row-select="hmc._rowSelection" md-on-select="hmc._onSelect" 
-                                    ng-repeat="med in cuc.data.meds | limitTo: 5 : (cuc.pageF -1) * 5">
+                                <tr md-row md-select="med" y md-auto-select="true" md-row-select="hmc._rowSelection" ng-click="ptc.addToPrescription(med)"
+                                    ng-repeat="med in ptc.data.meds | limitTo: 5 : (ptc.pageF -1) * 5">
                                     <td md-cell>
                                         {{med.name}}
                                     </td>
@@ -77,10 +75,9 @@
                         </table>
                     </md-table-container>
 
-                    <md-table-pagination md-limit="5" md-page="cuc.pageF" md-total="2" md-page-select="true" md-boundary-links="false" md-on-paginate="logPagination"></md-table-pagination>
+                    <md-table-pagination md-limit="5" md-page="ptc.pageF" md-total="5" md-page-select="true" md-boundary-links="false" md-on-paginate="logPagination"></md-table-pagination>
                 </md-card-content>
             </md-card>
-
         </div>
     </div>
 </md-content>
