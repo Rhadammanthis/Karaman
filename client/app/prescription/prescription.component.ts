@@ -22,12 +22,11 @@ class PrescriptionComponent extends Base {
   patient = null;
   todaysDate;
   patientAge;
-  prescription = "";
   data;
   pageM = 1;
   pageF = 1;
   selected = [];
-  text = ""
+  prescription = ""
   lol = "value..."
 
   /*@ngInject*/
@@ -42,20 +41,30 @@ class PrescriptionComponent extends Base {
     this.$route = $route;
     this.$scope = $scope;
 
-    this.prescription = "Nomads carried trough the times";
+    this.prescription = "";
 
     this.setTitle('Receta');
   }
 
   addToPrescription(item){
     console.log(item)
-    this.text += item.name + '\n' + item.body + '\n\n'
+    this.prescription += item.name + '\n' + item.body + '\n\n'
   }
 
   $onInit() {
-    this.setToolbarMode(6);
+    this.setToolbarMode(7);
     super.$onInit();
     this.setGenericNavigationLocation('checkup');
+
+    const _this = this;
+
+    this.setFirstToolbarAction(function(){
+      console.log('guardar')
+      _this.$cookies.put('prescription', _this.prescription );
+      _this.showAlert('Receta guardada correctamente');
+    })
+
+    this.prescription = this.$cookies.get('prescription');
 
     this.data = {
       "count": 8,

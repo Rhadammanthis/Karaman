@@ -76,7 +76,7 @@
 		</div>
 	</md-toolbar>
 
-		<md-toolbar class="grey" ng-if="nav._$rootScope.toolbarMode === 6">
+	<md-toolbar class="grey" ng-if="nav._$rootScope.toolbarMode === 6">
 		<div class="md-toolbar-tools">
 			<md-button class="md-icon-button" aria-label="Settings" ng-disabled="false" ng-click="nav.genericGoBack()">
 				<md-icon md-svg-icon="../../assets/icons/ic_arrow_back_white_24px.svg"></md-icon>
@@ -85,6 +85,21 @@
 				<span>{{nav._$rootScope.title}}</span>
 			</h1>
 			<span flex></span>
+		</div>
+	</md-toolbar>
+
+	<md-toolbar class="grey" ng-if="nav._$rootScope.toolbarMode === 7">
+		<div class="md-toolbar-tools">
+			<md-button class="md-icon-button" aria-label="Settings" ng-disabled="false" ng-click="nav.genericGoBack()">
+				<md-icon md-svg-icon="../../assets/icons/ic_arrow_back_white_24px.svg"></md-icon>
+			</md-button>
+			<h1 flex md-truncate>
+				<span>{{nav._$rootScope.title}}</span>
+			</h1>
+			<md-button class="md-icon-button" aria-label="Guardar" ng-click="nav.action()">
+				<md-tooltip md-direction="bottom">Guardar</md-tooltip>
+				<md-icon md-svg-icon="../../assets/icons/content-save.svg"></md-icon>
+			</md-button>
 		</div>
 	</md-toolbar>
 

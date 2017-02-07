@@ -37,9 +37,6 @@ export class CheckupComponent extends Base {
     this.$q = $q;
 
     this.setTitle('Consulta');
-    this.setFirstToolbarAction(function(){
-      console.log('Toolbar action lol');
-    })
 
     this.tempCheckup = {};
     
@@ -62,13 +59,27 @@ export class CheckupComponent extends Base {
       this.patientAge = Math.abs(new Date( Date.now() - this.patient.dateOfBirth).getUTCFullYear() - 1970);
     }
 
+    //Save checkup in the online DB
+    this.setFirstToolbarAction(function(){
+      console.log(_this.tempCheckup);
+      const prescription = _this.$cookies.get('prescription')
+      if(!prescription)
+        _this.showAlert('Necesitas completar una receta');
+      else
+        _this.showAlert('Informacion guardada')
+    })
+
+    //Go to Prescription
     this.setSecondToolbarAction(function(){
       // this.$cookies.put('patient', JSON.stringify(this.patient));
       // var checkup = {}
       _this.tempCheckup.patient = _this.patient;
       console.log(_this.tempCheckup);
+      _this.$cookies.put('checkup', JSON.stringify(_this.tempCheckup) );
       _this.$location.path('/prescription')
     })
+
+    this.tempCheckup = JSON.parse(this.$cookies.get('checkup'));
 
     // this.$watch('mydateOfBirth', function (newValue) {
     //   _this.patient.dateOfBirth = _this.$filter('date')(newValue, 'dd/MM/yyyy'); 
