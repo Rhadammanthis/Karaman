@@ -27,10 +27,10 @@ class RegisterPatientController extends Base {
     dateOfBirth = new Date();
 
     states = ('Aguascalientes+Baja California+Baja California Sur+Campeche+Chiapas+Chihuahua+Coahuila+Colima+CDMX+Durango+Guanajuato+Guerrero' +
-  '+Hidalgo+Jalisco+Estado de México+Michoacan+Morelos+Nayarit+Nuevo León+Oaxaca+Puebla+Queretaro+Quintana Roo+San Luis Potosí+' +
-    'Sinaloa+Sonora+Tabasco+Tamaulipas+Tlaxcala+Veracruz+Yucatán+Zacatecas').split('+').map(function (state) {
-      return { abbrev: state };
-    });
+        '+Hidalgo+Jalisco+Estado de México+Michoacan+Morelos+Nayarit+Nuevo León+Oaxaca+Puebla+Queretaro+Quintana Roo+San Luis Potosí+' +
+        'Sinaloa+Sonora+Tabasco+Tamaulipas+Tlaxcala+Veracruz+Yucatán+Zacatecas').split('+').map(function (state) {
+            return { abbrev: state };
+        });
 
     constructor($rootScope, $http, $location, $mdDialog, Auth, $cookies, Crypto) {
 
@@ -57,12 +57,27 @@ class RegisterPatientController extends Base {
         var _this = this;
 
         this.patient.dateOfBirth = this.dateOfBirth.getTime();
-        firebase.database().ref(`/users/6a32AMsmWqfbxAyJoDXDa1JLUYp1/patients`)
-            .push(this.patient)
-            .then(() => {
-                _this.showAlert();
-                console.log('Created!')
-            });
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                firebase.database().ref(`/users/${user.uid}/patients`)
+                    .push(_this.patient)
+                    .then(() => {
+                        _this.showAlert();
+                        console.log('Created!')
+                    });
+            }
+            else {
+                // No user is signed in.
+                // fun('Se ha producido un error');
+            }
+        });
+
+        // firebase.database().ref(`/users/6a32AMsmWqfbxAyJoDXDa1JLUYp1/patients`)
+        //     .push(this.patient)
+        //     .then(() => {
+        //         _this.showAlert();
+        //         console.log('Created!')
+        //     });
     }
 
     showAlert = function () {
